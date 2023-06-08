@@ -1,5 +1,17 @@
 {
   "dependencies": {
+    "com.leopotam.ecslite": {
+      "version": "file:E:/Programming/Unity/Packages/LeoECS Lite/ecslite-master",
+      "depth": 0,
+      "source": "local",
+      "dependencies": {}
+    },
+    "com.leopotam.ecslite.unityeditor": {
+      "version": "file:E:/Programming/Unity/Packages/LeoECS Lite/ecslite-unityeditor-master",
+      "depth": 0,
+      "source": "local",
+      "dependencies": {}
+    },
     "com.unity.collab-proxy": {
       "version": "2.0.1",
       "depth": 0,
