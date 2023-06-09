@@ -1,10 +1,20 @@
 using Leopotam.EcsLite;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using Zenject;
 
 public class PlayerInitSystem : IEcsInitSystem
 {
+    private int hp;
+    private float moveSpeed;
+    private Rigidbody rb;
+
+    public PlayerInitSystem(int hp, float moveSpeed, Rigidbody playerRigibody)
+    {
+        this.hp = hp;
+        this.moveSpeed = moveSpeed;
+        rb = playerRigibody;
+    }
+
     public void Init(IEcsSystems systems)
     {
         var ecsWorld = systems.GetWorld();
@@ -22,15 +32,12 @@ public class PlayerInitSystem : IEcsInitSystem
         inputPool.Add(playerEntity);
         movablePool.Add(playerEntity);
 
-
         ref var characterComponent = ref characterPool.Get(playerEntity);
         ref var inputComponent = ref inputPool.Get(playerEntity);
         ref var movableComponent = ref movablePool.Get(playerEntity);
 
-        var playerGO = GameObject.FindGameObjectWithTag("Player");
-
-        characterComponent.hp = 3;
-        movableComponent.moveSpeed = 100;
-        movableComponent.rb = playerGO.GetComponent<Rigidbody>();
+        characterComponent.hp = hp;
+        movableComponent.moveSpeed = moveSpeed;
+        movableComponent.rb = rb;
     }
 }

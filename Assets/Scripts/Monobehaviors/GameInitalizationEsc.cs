@@ -1,18 +1,28 @@
 using Leopotam.EcsLite;
 using UnityEngine;
+using Zenject;
 
-public class GameInitalization : MonoBehaviour
+public class GameInitalizationEsc : MonoBehaviour
 {
+    private DiContainer container;
     private EcsWorld world;
     private IEcsSystems initSystems;
     private IEcsSystems updateSystems;
     private IEcsSystems fixedUpdateSystems;
 
+    [Inject]
+    private void Construct(DiContainer container)
+    {
+        this.container = container;
+    }
+
     private void Start()
     {
+        PlayerInitSystem playerInitSys = container.TryResolve<PlayerInitSystem>();
+
         world = new EcsWorld();
         initSystems = new EcsSystems(world)
-                .Add(new PlayerInitSystem());
+                .Add(playerInitSys);
 
         initSystems.Init();
 
